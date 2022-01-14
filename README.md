@@ -5,6 +5,8 @@ Collection of personal nice scripts
 - radio : bash script to search and listen worlwide online radios (using all.api.radio-browser.info)
   - requirements: curl, jq, fzf, mpv
 
+![](./examples/radio.svg)
+
 ## How to ?
 
 - Download scripts to `/usr/local/bin`
