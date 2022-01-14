@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo playing lofi hiphop girl...
+cvlc "https://youtu.be/5qap5aO4i9A" --no-video -q

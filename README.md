@@ -7,6 +7,9 @@ Collection of personal nice scripts
 
 ![](./examples/radio.svg)
 
+- lofi : bash script to listen `lofi girl hip radio`
+  - requirements: vlc
+
 ## How to ?
 
 - Download scripts to `/usr/local/bin`
