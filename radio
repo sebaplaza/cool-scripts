@@ -1,0 +1,17 @@
+#!/bin/bash
+# Radio awesome script
+# Author Sebastian Plaza <sebastianplaza@gmail.com>
+# Requirements
+# jq, curl, fzf, mpv
+
+echo "Radio awesome script"
+echo "Choose a country"
+countries=$(curl -s http://all.api.radio-browser.info/json/countries)
+country=$(echo $countries | jq -r '.[] | .name' | fzf)
+echo Country: $country
+url="http://all.api.radio-browser.info/json/stations/bycountryexact/$country"
+radios=$(curl -s "$url")
+match=$(echo -E $radios | jq -r '.[] | .name' | fzf)
+stream=$(echo -E $radios | jq -r ".[] | select(.name == \"$match\") | .url")
+echo Listening radio $match 🎺 🎸 🥁 💃
+mpv $stream
