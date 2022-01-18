@@ -7,11 +7,13 @@
 echo "Radio awesome script"
 echo "Choose a country"
 countries=$(curl -s http://all.api.radio-browser.info/json/countries)
-country=$(echo $countries | jq -r '.[] | .name' | fzf)
+country=$(echo $countries | jq -r '.[] | .name' | fzf )
 echo Country: $country
 url="http://all.api.radio-browser.info/json/stations/bycountryexact/$country"
 radios=$(curl -s "$url")
-match=$(echo -E $radios | jq -r '.[] | .name' | fzf)
-stream=$(echo -E $radios | jq -r ".[] | select(.name == \"$match\") | .url")
-echo Listening radio $match 🎺 🎸 🥁 💃
-mpv $stream
+match=$(echo -E $radios | jq -r '.[] | (.name + " | " + .url + " | " + .tags)' | fzf)
+echo $match
+radio_name=$(echo $match | head -n1 | cut -d "|" -f1)
+radio_url=$(echo $match | head -n1 | cut -d "|" -f2)
+echo Listening radio $radio_name 🎺 🎸 🥁 💃
+mpv $radio_url
